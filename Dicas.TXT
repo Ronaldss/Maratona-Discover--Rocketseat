@@ -1,0 +1,14 @@
+informaçoes guardadas no local store do navegador.
+
+
+1. o que é uma pessoa programdora
+	[]soft e hardskill
+	[]especialista vs generalista
+	
+2. Guia de estudos e organizaççao
+	[]Apredizado ativo x passivo
+		[]aprender a se ´perguntar: se pergunte o q vc acabou []de aprender
+	[]Anotações e revisao
+		[]anote mais apos a aula;
+		[]revise suas anotações e pesquise o que n entendeu
+	
