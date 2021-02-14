@@ -5,121 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maratona Discover</title>
-  <style>
-    /* table {
-      border: solid 1px #000;
-      margin-bottom: 50px;
-    }
-    th {
-      background-color:dimgray;
-    }
-    td {
-      background-color:antiquewhite;
-    } */
-  </style>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;0,800;1,100;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>dev.finace$</h1>
+  <header>
+    <h1 id="logo">dev.finace$</h1>
+  </header>
+  <main class="container">
+    <section id="balance">
+      <h2>Balanço</h2>
+      <div class="card">
+        <h3>Entrada</h3>
+        <p>R$ 5.000,00</p>
+      </div>
+      <div class="card">  
+        <h3>Saidas</h3>
+        <p>R$ 3.000,00</p>
+      </div>
+      <div class="card total">
+        <h3>Total</h3>
+        <p>R$ 2.000,00</p>
+      </div>  
+    </section>
 
-  <h2>Banlanço</h2>
-  <h3>Entrada</h3>
-  <p>R$ 5.000,00</p>
-
-  <h3>Saidas</h3>
-  <p>R$ 3.000,00</p>
-
-  <h3>Total</h3>
-  <p>R$ 3.000,00</p>
-
-  
-  
-  <h2>Transações</h2>
-
-  <table>
-    <caption>Pessoas lindas</caption>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Idade</th>
-        <th>Bonito(a)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ronald</td>
-        <td>30</td>
-        <td>sim</td>
-      </tr>
-      <tr>
-        <td>Emanuella</td>
-        <td>31</td>
-        <td>não</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>Total</td>
-        <td>61</td>
-      </tr>
-    </tfoot>
-  </table><br><br><br>
-
-  
-
-
-
-<table>  
-  <caption>Produtos vendidos por loja</caption>
-
-
-  <colgroup>
-    <col>
-    <col span="2" style="background-color: red;">
-    <col  span="2" style="background-color:#0f0">
-  </colgroup>
-
-
-  <thead>
-    <tr>
-      <th rowspan="2"></th>
-      <th colspan="2" scope="colgroup">Loja 1</th>
-      <th colspan="2" scope="colgroup">Loja 2</th>
-    </tr>
-    <tr>
-      <th scope="col">Produzidos</th>
-      <th scope="col">Vendidos</th>
-      <th scope="col">Produzidos</th>
-      <th scope="col">Vendidos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Item 1</th>
-      <td>100</td>
-      <td>75</td>
-      <td>10</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>Item 2</th>
-      <td>100</td>
-      <td>75</td>
-      <td>160</td>
-      <td>150</td>
-    </tr>
-  </tbody>
-  <tfoot>
-
-  </tfoot>
-</table>
-
-
-
-
-
-
-
-
+    <section id="trasaction">
+      <h2>Transações</h2>
+      <table id="data-table">
+        <!-- <caption>Transações</caption> -->
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="description">Luz</td>
+            <td class="expense">-R$ 5000,00-</td>
+            <td class="date">23/01/2121</td>
+          </tr>
+          <tr>
+            <td class="description">Criaçao de Website</td>
+            <td class="income">R$ 5000,00-</td>
+            <td class="date">24/01/2121</td>
+          </tr>
+          <tr>
+            <td class="description">Aluguel</td>
+            <td class="expense">R$ 1500,00-</td>
+            <td class="date">26/01/2121</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>dev.finance$</p>
+  </footer>
 </body>
 </html>
 
