@@ -20,25 +20,21 @@ const Modal = { // desafio: depois tente fazer o Modal apenas com a função too
 
 const transactions = [
   {
-    id: 1,
     description: 'Luz',
     amount: -50000,
     date: '23/01/2021'
   },
   {
-    id: 1,
     description: 'Website',
     amount: -30000,
     date: '23/01/2021'
   },
   {
-    id: 3,
     description: 'Internet',
     amount: -20000,
     date: '23/01/2021'
   },
   {
-    id: 4,
     description: 'App',
     amount: 350000,
     date: '23/01/2021'
@@ -53,11 +49,23 @@ const transactions = [
 
 
 const Transaction = {
+  all: transactions,
+
+  add(transaction){
+    Transaction.all.push(transaction)
+    App.reload()
+  },
+
+  remove(index) {
+    Transaction.all.splice(index, 1)
+    App.reload()
+  },
+
   incomes() {
     let income = 0;
     // pegar todas as transacoes
     // para cada transacao
-    transactions.forEach(transaction => {
+    Transaction.all.forEach(transaction => {
       // se ela for maior que zero
       if(transaction.amount > 0) {
         // somar a uma variavel e retornar a variavel
@@ -67,10 +75,28 @@ const Transaction = {
     return income;
   },
   expenses() {
-    return "+ saídas"
+      let expense = 0;
+      // pegar todas as transacoes
+      // para cada transacao
+      Transaction.all.forEach(transaction => {
+        // se ela for menor que zero
+        if(transaction.amount < 0) {
+          // somar a uma variavel e retornar a variavel
+          expense += transaction.amount;
+        }
+      })
+      return expense;
   },
   total() {
-    return "Total"
+    return Transaction.incomes() + Transaction.expenses();
+
+
+
+
+
+
+
+
   }
 }
 
@@ -102,13 +128,17 @@ const DOM = {
   updateBalance() {
     document
       .getElementById('incomeDisplay')
-      .innerHTML = Transaction.incomes()
+      .innerHTML = Utils.formatCurrency(Transaction.incomes())
     document
       .getElementById('expenseDisplay')
-      .innerHTML = Transaction.expenses()
+      .innerHTML = Utils.formatCurrency(Transaction.expenses())
     document
       .getElementById('totalDisplay')
-      .innerHTML = Transaction.total()
+      .innerHTML = Utils.formatCurrency(Transaction.total())
+  },
+
+  clearTransactions() {
+    DOM.transactionsContainer.innerHTML = ""
   }
 
 }
@@ -129,8 +159,35 @@ const Utils = {
    }
 }
 
-transactions.forEach(function(transaction) {
-  DOM.addTrasaction(transaction)
-})
+const App = {
+  init() {
 
-DOM.updateBalance()
+    Transaction.all.forEach(transaction => {
+      DOM.addTrasaction(transaction)
+    })
+    
+    DOM.updateBalance()
+
+  },
+  reload() {
+    DOM.clearTransactions()
+    App.init()
+  },
+}
+
+App.init()
+
+
+// Transaction.add({
+//   description: 'Tmj!',
+//   amount: 3123,
+//   date: '21/02/2021'
+// })
+
+
+
+
+
+
+
+
