@@ -17,39 +17,35 @@ const Modal = { // desafio: depois tente fazer o Modal apenas com a função too
   }
 }
 
-
-const transactions = [
-  {
-    description: 'Luz',
-    amount: -50000,
-    date: '23/01/2021'
-  },
-  {
-    description: 'Website',
-    amount: -30000,
-    date: '23/01/2021'
-  },
-  {
-    description: 'Internet',
-    amount: -20000,
-    date: '23/01/2021'
-  },
-  {
-    description: 'App',
-    amount: 350000,
-    date: '23/01/2021'
-  },
-]
-
 // Constante Transaction
 // 1 - somar as entradas
 // 2 - somar as saídas
 // 3 - remover das entradas o valor das saidas
 // 4 - assim teremos o total
 
-
 const Transaction = {
-  all: transactions,
+  all:  [
+    {
+      description: 'Luz',
+      amount: -50000,
+      date: '23/01/2021'
+    },
+    {
+      description: 'Website',
+      amount: -30000,
+      date: '23/01/2021'
+    },
+    {
+      description: 'Internet',
+      amount: -20000,
+      date: '23/01/2021'
+    },
+    {
+      description: 'App',
+      amount: 350000,
+      date: '23/01/2021'
+    },
+  ],
 
   add(transaction){
     Transaction.all.push(transaction)
@@ -143,6 +139,7 @@ const DOM = {
 
 }
 
+
 const Utils = {
    formatCurrency(value) {
      const signal = Number(value) < 0 ? "-" : ""
@@ -157,6 +154,53 @@ const Utils = {
      })
      return signal + value
    }
+}
+
+const Form = {
+  description: document.querySelector('input#description'),
+  amount: document.querySelector('input#amount'),
+  date: document.querySelector('input#date'),
+  
+  getValues() {
+    return {
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value
+    }
+  },
+
+  // formatData() {
+  //   console.log('Formatar os dados')
+  // },
+  validateFields() {
+    const { description, amount, date} = Form.getValues()
+
+    if( description.trim() === "" ||
+        amount.trim() === "" ||
+        date.trim() === "") {
+          throw new Error("Por favor, prencha todos os campos")
+        }
+  },
+  submit(event){
+    event.preventDefault()
+  
+   
+    try {
+      // verificar se todas as informaçãoes foram preenchidas
+      Form.validateFields()
+      
+      // formatar os dados para salvar
+      // Form.formatData()
+
+      // apagat os dados do formulário
+      // modal feche
+      // atualizar a aplicação
+
+    }catch (error) {
+      alert(error.message)
+    }
+    
+  }
 }
 
 const App = {
@@ -176,6 +220,9 @@ const App = {
 }
 
 App.init()
+
+
+
 
 
 // Transaction.add({
