@@ -100,12 +100,13 @@ const DOM = {
   transactionsContainer: document.querySelector('#data-table tbody'),
   addTrasaction(transaction, index) {
     const tr = document.createElement('tr')
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index
 
     DOM.transactionsContainer.appendChild(tr)
 
   },
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     const CSSclass = transaction.amount > 0 ? "income" : "expanse"
 
     const amount = Utils.formatCurrency(transaction.amount)
@@ -115,7 +116,7 @@ const DOM = {
       <td class="${CSSclass}">${amount}</td>
       <td class="date">${transaction.date}</td>
       <td>
-        <img src="./assets/minus.svg" alt="Remover trasação">
+        <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover trasação">
       </td>
     `
     return html
@@ -141,6 +142,17 @@ const DOM = {
 
 
 const Utils = {
+
+  formatAmount(value) {
+    value = Number(value.replace(/\,\./g, "")) * 100
+    return value
+  },
+
+  formatDate(date) {
+    const splittedDate = date.split("-")
+    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+  },
+
    formatCurrency(value) {
      const signal = Number(value) < 0 ? "-" : ""
 
@@ -179,8 +191,29 @@ const Form = {
         amount.trim() === "" ||
         date.trim() === "") {
           throw new Error("Por favor, prencha todos os campos")
+
         }
   },
+
+  formatValues() {
+    let { description, amount, date} = Form.getValues()
+    amount = Utils.formatAmount(amount)
+
+    date = Utils.formatDate(date)
+
+    return {
+      description,
+      amount,
+      date
+    }
+  },
+
+  clearFields() {
+    Form.description.value = ""
+    Form.amount.value = ""
+    Form.date.value = ""
+  },
+
   submit(event){
     event.preventDefault()
   
@@ -190,11 +223,16 @@ const Form = {
       Form.validateFields()
       
       // formatar os dados para salvar
-      // Form.formatData()
+      const transaction = Form.formatValues()
+
+      // salvar
+      Transaction.add(transaction)
 
       // apagat os dados do formulário
-      // modal feche
-      // atualizar a aplicação
+      Form.clearFields()
+
+      // modal fechar
+      Modal.close()
 
     }catch (error) {
       alert(error.message)
@@ -203,11 +241,16 @@ const Form = {
   }
 }
 
+const Storege = {
+  get() {},
+  set(transaction) {}
+}
+
 const App = {
   init() {
 
-    Transaction.all.forEach(transaction => {
-      DOM.addTrasaction(transaction)
+    Transaction.all.forEach((transaction, index) => {
+      DOM.addTrasaction(transaction, index)
     })
     
     DOM.updateBalance()
